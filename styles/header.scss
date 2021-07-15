@@ -1,0 +1,111 @@
+$desktop: 768px;
+$mobile: 411px;
+
+@mixin desktop {
+    @media (min-width:#{$desktop}) {
+        @content;
+    }
+}
+@mixin mobile {
+    @media (max-width:#{$desktop}) {
+        @content;
+    }
+}
+
+header{
+    position: relative;
+    display: flex;
+    background-color: orange;
+    @include desktop{
+        background-color: orchid;
+    }
+    padding: 12px;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    .navbtn{
+        display: none;
+        &:checked ~ .navigation{
+            transform: scale(1, 1);
+
+        }
+    }
+    .navigation{
+        overflow: hidden;
+        transform: scale(0, 1);
+        transform-origin: right;
+        transition: transform ease-in 300ms;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.548);
+        @include mobile{
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav{
+            height: 100%;
+            @include mobile{
+                width: 50%;
+                background-color: white;
+            }
+            ul{
+                display: flex;
+                @include mobile{
+                    margin-top: 60px;
+                    flex-direction: column;
+                    font-size: 2rem;
+                }
+                li{
+                    list-style: none;
+                    margin: 0 12px 0 12px;
+                }
+            }
+        }
+    }
+
+    label{
+        z-index: 999999999;
+        width: 24px;
+        display: flex;
+        span{
+            position: relative;
+            width: 24px;
+            height: 3px;
+            background-color: black;
+            &:before,&:after{
+                content: '';
+                position: absolute;
+                width: 24px;
+                height: 3px;
+                background-color: black;
+
+            }
+            &::before{
+                top: 7px;
+            }
+            &::after{
+                bottom: 7px;
+            }
+        }
+    }
+
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+}
+// @media screen and(max-width:411px){
+//     .navigation{
+//         nav{
+//             ul{
+//                 flex-direction: column;
+//             }
+//         }
+//     }
+// }
